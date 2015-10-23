@@ -74,20 +74,27 @@ Ows4js.Filter.prototype.PropertyName = function (propertyName){
 };
 
 // Comparison Operators
-Ows4js.Filter.prototype.isLike = function(value){
+Ows4js.Filter.prototype.isLike = function(value, options){
+    options = options || {};
+    var escapeChar = options.escapeChar || "";
+    var singleChar = options.singleChar || "_";
+    var wildCard = options.wildCard || "%";
+    var matchCase = options.matchCase || false;
+    
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsLike' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsLikeType",
-            escapeChar: "",
-            singleChar: "_",
-            wildCard: "%",
+            escapeChar: escapeChar,
+            singleChar: singleChar,
+            wildCard: wildCard,
+            matchCase: matchCase,
             literal: {
                 TYPE_NAME: "Filter_1_1_0.LiteralType",
                 content: [value]
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -107,7 +114,7 @@ Ows4js.Filter.prototype.isBetween = function(lowerValue, upperValue){
             expression :{
                 'ogc:PropertyName': {
                     TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                    content: this.tmp.PropertyName
+                    content: [this.tmp.PropertyName]
                 }
             },
             lowerBoundary:{
@@ -139,7 +146,7 @@ Ows4js.Filter.prototype.isEqualTo = function(value){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -158,7 +165,7 @@ Ows4js.Filter.prototype.isLessThanOrEqualTo = function(value){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -177,7 +184,7 @@ Ows4js.Filter.prototype.isGreaterThan = function(value){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -196,7 +203,7 @@ Ows4js.Filter.prototype.isLessThan = function(value){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -215,7 +222,7 @@ Ows4js.Filter.prototype.isGreaterThanOrEqualTo = function(value){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -234,7 +241,7 @@ Ows4js.Filter.prototype.isNotEqualTo = function(value){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -371,7 +378,7 @@ Ows4js.Filter.prototype.BBOX = function(llat, llon, ulat, ulon, srsName) {
             },
             propertyName :{
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: "ows:BoundingBox"
+                content: ["ows:BoundingBox"]
             }
         }
     };
@@ -416,6 +423,7 @@ Ows4js.Filter.prototype.getBasicFilterFromXML = function(xml){
     var unmarshaller = Ows4js.Filter.JsonixContext.createUnmarshaller();
     return unmarshaller.unmarshalDocument(xml);
 };
+
 /**
  * Jsonix CSW unmarshaller
  *
