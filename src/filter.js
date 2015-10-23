@@ -16,13 +16,20 @@ Ows4js.Filter.prototype.PropertyName = function (propertyName){
 };
 
 // Comparison Operators
-Ows4js.Filter.prototype.isLike = function(value){
+Ows4js.Filter.prototype.isLike = function(value, options){
+    options = options || {};
+    var escapeChar = options.escapeChar || "";
+    var singleChar = options.singleChar || "_";
+    var wildCard = options.wildCard || "%";
+    var matchCase = options.matchCase || false;
+    
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsLike' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsLikeType",
-            escapeChar: "",
-            singleChar: "_",
-            wildCard: "%",
+            escapeChar: escapeChar,
+            singleChar: singleChar,
+            wildCard: wildCard,
+            matchCase: matchCase,
             literal: {
                 TYPE_NAME: "Filter_1_1_0.LiteralType",
                 content: [value]
