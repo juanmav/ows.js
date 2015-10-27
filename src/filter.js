@@ -59,16 +59,22 @@ Ows4js.Filter.prototype.isBetween = function(lowerValue, upperValue){
                     content: this.tmp.PropertyName
                 }
             },
-            lowerBoundary:{
-                'ogc:Literal':{
-                    TYPE_NAME: "Filter_1_1_0.LiteralType",
-                    content :[lowerValue]
+            "lowerBoundary": {
+                TYPE_NAME: "Filter_1_1_0.LowerBoundaryType",
+                expression: {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [lowerValue]
+                    }
                 }
             },
-            upperBoundary:{
-                'ogc:Literal':{
-                    TYPE_NAME: "Filter_1_1_0.LiteralType",
-                    content :[upperValue]
+            "upperBoundary": {
+                TYPE_NAME: "Filter_1_1_0.UpperBoundaryType",
+                expression: {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [upperValue]
+                    }
                 }
             }
         }
