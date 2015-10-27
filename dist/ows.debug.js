@@ -74,13 +74,20 @@ Ows4js.Filter.prototype.PropertyName = function (propertyName){
 };
 
 // Comparison Operators
-Ows4js.Filter.prototype.isLike = function(value){
+Ows4js.Filter.prototype.isLike = function(value, options){
+    options = options || {};
+    var escapeChar = options.escapeChar || "";
+    var singleChar = options.singleChar || "_";
+    var wildCard = options.wildCard || "%";
+    var matchCase = options.matchCase || false;
+    
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsLike' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsLikeType",
-            escapeChar: "",
-            singleChar: "_",
-            wildCard: "%",
+            escapeChar: escapeChar,
+            singleChar: singleChar,
+            wildCard: wildCard,
+            matchCase: matchCase,
             literal: {
                 TYPE_NAME: "Filter_1_1_0.LiteralType",
                 content: [value]
@@ -110,16 +117,22 @@ Ows4js.Filter.prototype.isBetween = function(lowerValue, upperValue){
                     content: this.tmp.PropertyName
                 }
             },
-            lowerBoundary:{
-                'ogc:Literal':{
-                    TYPE_NAME: "Filter_1_1_0.LiteralType",
-                    content :[lowerValue]
+            "lowerBoundary": {
+                TYPE_NAME: "Filter_1_1_0.LowerBoundaryType",
+                expression: {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [lowerValue]
+                    }
                 }
             },
-            upperBoundary:{
-                'ogc:Literal':{
-                    TYPE_NAME: "Filter_1_1_0.LiteralType",
-                    content :[upperValue]
+            "upperBoundary": {
+                TYPE_NAME: "Filter_1_1_0.UpperBoundaryType",
+                expression: {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [upperValue]
+                    }
                 }
             }
         }
@@ -416,6 +429,7 @@ Ows4js.Filter.prototype.getBasicFilterFromXML = function(xml){
     var unmarshaller = Ows4js.Filter.JsonixContext.createUnmarshaller();
     return unmarshaller.unmarshalDocument(xml);
 };
+
 /**
  * Jsonix CSW unmarshaller
  *
