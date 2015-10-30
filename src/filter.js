@@ -84,18 +84,21 @@ Ows4js.Filter.prototype.isBetween = function(lowerValue, upperValue){
     return this;
 };
 
-Ows4js.Filter.prototype.isEqualTo = function(value){
+Ows4js.Filter.prototype.isEqualTo = function(value) {
     this['ogc:Filter'].comparisonOps = {
-        'ogc:PropertyIsEqualTo' : {
-            TYPE_NAME: "Filter_1_1_0.PropertyIsEqualTo",
-            literal: {
-                TYPE_NAME: "Filter_1_1_0.LiteralType",
-                content: [value]
-            },
-            propertyName: {
-                TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
-            }
+        "ogc:PropertyIsEqualTo": {
+            TYPE_NAME: "Filter_1_1_0.BinaryComparisonOpType",
+            expression: [{
+                "ogc:PropertyName": {
+                    TYPE_NAME: "Filter_1_1_0.PropertyNameType",
+                    content: this.tmp.PropertyName
+                }
+            }, {
+                "ogc:Literal": {
+                    TYPE_NAME: "Filter_1_1_0.LiteralType",
+                    content: [value]
+                }
+            }]
         }
     };
     // Delete the tmp property to prevent jsonix fail.
@@ -107,14 +110,20 @@ Ows4js.Filter.prototype.isLessThanOrEqualTo = function(value){
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsLessThanOrEqualTo' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsLessThanOrEqualTo",
-            literal: {
-                TYPE_NAME: "Filter_1_1_0.LiteralType",
-                content: [value]
-            },
-            propertyName: {
-                TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
-            }
+            expression : [
+                {
+                    'ogc:PropertyName': {
+                        TYPE_NAME: "Filter_1_1_0.PropertyNameType",
+                        content: this.tmp.PropertyName
+                    },
+                },
+                {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [value]
+                    }
+                }
+            ]
         }
     };
     // Delete the tmp property to prevent jsonix fail.
@@ -126,16 +135,23 @@ Ows4js.Filter.prototype.isGreaterThan = function(value){
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsGreaterThan' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsGreaterThan",
-            literal: {
-                TYPE_NAME: "Filter_1_1_0.LiteralType",
-                content: [value]
-            },
-            propertyName: {
-                TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
-            }
+            expression : [
+                {
+                    'ogc:PropertyName': {
+                        TYPE_NAME: "Filter_1_1_0.PropertyNameType",
+                        content: this.tmp.PropertyName
+                    },
+                },
+                {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [value]
+                    }
+                }
+            ]
         }
     };
+
     // Delete the tmp property to prevent jsonix fail.
     delete this.tmp;
     return this;
@@ -145,16 +161,23 @@ Ows4js.Filter.prototype.isLessThan = function(value){
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsLessThan' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsLessThan",
-            literal: {
-                TYPE_NAME: "Filter_1_1_0.LiteralType",
-                content: [value]
-            },
-            propertyName: {
-                TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
-            }
+            expression : [
+                {
+                    'ogc:PropertyName': {
+                        TYPE_NAME: "Filter_1_1_0.PropertyNameType",
+                        content: this.tmp.PropertyName
+                    },
+                },
+                {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [value]
+                    }
+                }
+            ]
         }
     };
+
     // Delete the tmp property to prevent jsonix fail.
     delete this.tmp;
     return this;
@@ -164,14 +187,20 @@ Ows4js.Filter.prototype.isGreaterThanOrEqualTo = function(value){
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsGreaterThanOrEqualTo' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsGreaterThanOrEqualTo",
-            literal: {
-                TYPE_NAME: "Filter_1_1_0.LiteralType",
-                content: [value]
-            },
-            propertyName: {
-                TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
-            }
+            expression : [
+                {
+                    'ogc:PropertyName': {
+                        TYPE_NAME: "Filter_1_1_0.PropertyNameType",
+                        content: this.tmp.PropertyName
+                    },
+                },
+                {
+                    "ogc:Literal": {
+                        TYPE_NAME: "Filter_1_1_0.LiteralType",
+                        content: [value]
+                    }
+                }
+            ]
         }
     };
     // Delete the tmp property to prevent jsonix fail.
@@ -183,14 +212,17 @@ Ows4js.Filter.prototype.isNotEqualTo = function(value){
     this['ogc:Filter'].comparisonOps = {
         'ogc:PropertyIsNotEqualTo' : {
             TYPE_NAME: "Filter_1_1_0.PropertyIsNotEqualTo",
-            literal: {
-                TYPE_NAME: "Filter_1_1_0.LiteralType",
-                content: [value]
-            },
-            propertyName: {
-                TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
-            }
+            expression: [{
+                "ogc:PropertyName": {
+                    TYPE_NAME: "Filter_1_1_0.PropertyNameType",
+                    content: this.tmp.PropertyName
+                }
+            }, {
+                "ogc:Literal": {
+                    TYPE_NAME: "Filter_1_1_0.LiteralType",
+                    content: [value]
+                }
+            }]
         }
     };
     // Delete the tmp property to prevent jsonix fail.
