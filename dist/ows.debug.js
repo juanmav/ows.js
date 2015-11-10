@@ -94,7 +94,7 @@ Ows4js.Filter.prototype.isLike = function(value, options){
             },
             propertyName: {
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: this.tmp.PropertyName
+                content: [this.tmp.PropertyName]
             }
         }
     };
@@ -114,7 +114,7 @@ Ows4js.Filter.prototype.isBetween = function(lowerValue, upperValue){
             expression :{
                 'ogc:PropertyName': {
                     TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                    content: this.tmp.PropertyName
+                    content: [this.tmp.PropertyName]
                 }
             },
             "lowerBoundary": {
@@ -149,7 +149,7 @@ Ows4js.Filter.prototype.isEqualTo = function(value) {
             expression: [{
                 "ogc:PropertyName": {
                     TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                    content: this.tmp.PropertyName
+                    content: [this.tmp.PropertyName]
                 }
             }, {
                 "ogc:Literal": {
@@ -172,7 +172,7 @@ Ows4js.Filter.prototype.isLessThanOrEqualTo = function(value){
                 {
                     'ogc:PropertyName': {
                         TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                        content: this.tmp.PropertyName
+                        content: [this.tmp.PropertyName]
                     },
                 },
                 {
@@ -197,7 +197,7 @@ Ows4js.Filter.prototype.isGreaterThan = function(value){
                 {
                     'ogc:PropertyName': {
                         TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                        content: this.tmp.PropertyName
+                        content: [this.tmp.PropertyName]
                     },
                 },
                 {
@@ -223,7 +223,7 @@ Ows4js.Filter.prototype.isLessThan = function(value){
                 {
                     'ogc:PropertyName': {
                         TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                        content: this.tmp.PropertyName
+                        content: [this.tmp.PropertyName]
                     },
                 },
                 {
@@ -249,7 +249,7 @@ Ows4js.Filter.prototype.isGreaterThanOrEqualTo = function(value){
                 {
                     'ogc:PropertyName': {
                         TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                        content: this.tmp.PropertyName
+                        content: [this.tmp.PropertyName]
                     },
                 },
                 {
@@ -273,7 +273,7 @@ Ows4js.Filter.prototype.isNotEqualTo = function(value){
             expression: [{
                 "ogc:PropertyName": {
                     TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                    content: this.tmp.PropertyName
+                    content: [this.tmp.PropertyName]
                 }
             }, {
                 "ogc:Literal": {
@@ -416,7 +416,7 @@ Ows4js.Filter.prototype.BBOX = function(llat, llon, ulat, ulon, srsName) {
             },
             propertyName :{
                 TYPE_NAME: "Filter_1_1_0.PropertyNameType",
-                content: "ows:BoundingBox"
+                content: ["ows:BoundingBox"]
             }
         }
     };
